@@ -51,10 +51,11 @@ shared.JTable = function(tb)
 		return "nil"
 	end
 	
-	local str = ""
+	local str = "{"
 	for k,v in ipairs(tb) do
-		str = str .. " [".. tostring(k).. " = " .. tostring(v) .. "] "
+		str = str .. tostring(k).. " = " .. tostring(v) .. ","
 	end
+	str = str .. "}"
 	return str
 end
 
