@@ -1,4 +1,3 @@
-local module = {}
 
 local RS = game:GetService("RunService")
 local TestService = game:GetService("TestService")
@@ -7,7 +6,7 @@ if not RS:IsServer() then
 	tag = "[C]"
 end
 
-local LogIgnoreList = {}
+shared.JLogIgnoreList = {}
 
 shared.JLog = function(...)
 	local Msg = tag
@@ -16,7 +15,7 @@ shared.JLog = function(...)
 		local vType = typeof(v)
 		if vType == "Instance" then
 			src = v
-			for _,ignore in pairs(LogIgnoreList) do
+			for _,ignore in pairs(JLogIgnoreList) do
 				if v.Name == ignore then
 					return
 				end
@@ -62,5 +61,3 @@ shared.JDebug = function(...)
 	
 	shared.JLog("[Debug]", ...)
 end
-
-return module
