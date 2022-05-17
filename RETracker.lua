@@ -20,6 +20,7 @@ local function CheckRE(ins)
 			shared.JLog("=================================")
 		end)
 		table.insert(shared.JConnects, conn)
+		shared.JLog("Tracking RE: " , ins:GetFullName())
 	end
 end
 
