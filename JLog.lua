@@ -61,3 +61,6 @@ shared.JDebug = function(...)
 	
 	shared.JLog("[Debug]", ...)
 end
+
+
+shared.JDebug("JLog Load Success!")
