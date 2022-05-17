@@ -20,6 +20,8 @@ shared.JLog = function(...)
 					return
 				end
 			end
+		elseif vType == "table" then
+			Msg = Msg .. shared.JTable(v)
 		else
 			Msg = Msg .. tostring(v)
 		end
@@ -34,6 +36,8 @@ shared.JWarn = function(...)
 		local vType = typeof(v)
 		if vType == "Instance" then
 			src = v
+		elseif vType == "table" then
+			Msg = Msg .. shared.JTable(v)
 		else
 			Msg = Msg .. tostring(v)
 		end
