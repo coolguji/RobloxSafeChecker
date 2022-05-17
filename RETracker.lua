@@ -31,8 +31,8 @@ local function Execute()
 	for _,v in pairs(game.ReplicatedStorage:GetDescendants()) do
 		CheckRE(v)
 	end
-
-	shared.JLog("WOW!!!! RETradker Executed SUCCESS !!!!!!")
 end
 
 Execute()
+
+shared.JLog("Thanks for using Roblox RETradker!")
