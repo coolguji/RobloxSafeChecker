@@ -2,7 +2,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/coolguji/RobloxSafeCh
 
 if shared.JConnects then
 	for _,v in pairs(shared.JConnects) do
-		v:DisConnect()
+		pcall(function()
+			v:Disconnect()
+		end)
 	end
 end
 
