@@ -5,7 +5,11 @@ local function CheckRE(ins)
 		ins.OnClientEvent:Connect(function(...)
 		    shared.JLog("=================================")
 			shared.JLog("RE Received", ins:GetFullName())
-			shared.JLog(...)
+			local id = 1
+			for k,v in ipairs({...}) do
+				shared.JLog(tostring(id) , ": ", ...)
+			end
+			
 			shared.JLog("=================================")
 		end)
 	end
