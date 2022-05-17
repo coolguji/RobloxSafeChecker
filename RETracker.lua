@@ -8,6 +8,7 @@ local function CheckRE(ins)
 			local id = 1
 			for k,v in ipairs({...}) do
 				shared.JLog(tostring(id) , ": ", ...)
+				id = id + 1
 			end
 			
 			shared.JLog("=================================")
