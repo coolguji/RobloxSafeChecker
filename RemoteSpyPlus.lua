@@ -194,7 +194,7 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 		end
 
 		if shared.DebugFakeParam then
-			local param = unpack(...)
+			local param = {...}
 			local modParam = {}
 			for kkk,v in pairs(param) do
 				local vType = typeof(v)
