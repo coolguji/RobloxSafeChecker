@@ -193,6 +193,32 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 			end
 		end
 
+		if shared.DebugFakeParam then
+			local param = unpack(...)
+			local modParam = {}
+			for _,v in pairs(param) do
+				local vType = typeof(v)
+				if vType == "Instance" and shared.DebugFakeParamReplaceInst then
+					table.insert(modParam, shared.DebugFakeParamReplaceInst)
+					continue
+				end
+				if vType == "number" and shared.DebugFakeParamReplaceNum then
+					table.insert(modParam, shared.DebugFakeParamReplaceNum)
+					continue
+				end
+				if vType == "string" and shared.DebugFakeParamReplaceStr then
+					table.insert(modParam, shared.DebugFakeParamReplaceStr)
+					continue
+				end
+				table.insert(modParam, v)
+			end
+
+			local returnValues = {realMethods[key](self, unpack(modParam))}
+			shared.JLog("DebugFakeParam Original Param is ", tableToString(param))
+			shared.JLog("\n" .. strId .. " ClassName: " .. self.ClassName .. " | Path: " .. self:GetFullName() .. " | Method: " .. key .. "\n" .. strId .. " Packed Arguments: " .. tableToString(allPassed) .. "\n" .. strId .. " Packed Returned: " .. tableToString(returnValues) .. "\n")
+			return unpack(returnValues)
+		end
+
 		local returnValues = {realMethods[key](self, ...)}
 
 		shared.JLog("\n" .. strId .. " ClassName: " .. self.ClassName .. " | Path: " .. self:GetFullName() .. " | Method: " .. key .. "\n" .. strId .. " Packed Arguments: " .. tableToString(allPassed) .. "\n" .. strId .. " Packed Returned: " .. tableToString(returnValues) .. "\n")
@@ -202,3 +228,15 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 end
 
 shared.JLog("Remote Spy Execute Success!")
+
+-------Params--------
+shared.DebugAutoReNum = nil
+
+shared.DebugFakeParam = nil
+shared.DebugFakeParamReplaceNum = 1/0
+shared.DebugFakeParamReplaceNum = -99999999
+shared.DebugFakeParamReplaceNum = 99999999
+shared.DebugFakeParamReplaceNum = 0
+shared.DebugFakeParamReplaceStr = "GUJI"
+shared.DebugFakeParamReplaceInst = game.Players.LocalPlayer
+
