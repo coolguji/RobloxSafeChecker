@@ -236,7 +236,8 @@ shared.DebugFakeParam = nil
 shared.DebugFakeParamReplaceNum = 1/0
 shared.DebugFakeParamReplaceNum = -99999999
 shared.DebugFakeParamReplaceNum = 99999999
-shared.DebugFakeParamReplaceNum = 0
+shared.DebugFakeParamReplaceNum = nil
 shared.DebugFakeParamReplaceStr = "GUJI"
+shared.DebugFakeParamReplaceStr = nil
 shared.DebugFakeParamReplaceInst = game.Players.LocalPlayer
 
