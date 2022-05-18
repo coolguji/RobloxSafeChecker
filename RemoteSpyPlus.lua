@@ -196,7 +196,7 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 		if shared.DebugFakeParam then
 			local param = unpack(...)
 			local modParam = {}
-			for _,v in pairs(param) do
+			for kkk,v in pairs(param) do
 				local vType = typeof(v)
 				if vType == "Instance" and shared.DebugFakeParamReplaceInst then
 					table.insert(modParam, shared.DebugFakeParamReplaceInst)
