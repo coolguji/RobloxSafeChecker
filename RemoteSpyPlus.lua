@@ -170,8 +170,7 @@ local function CanSpy(fName)
 	end
 
 	for k,v in pairs(shared.NoSpyList) do
-		print("Can Spy " .. tostring(fName) .. " " .. v)
-		if string.find(fName, v) > 0 then
+		if string.find(fName, v) then
 			return false
 		end
 	end
