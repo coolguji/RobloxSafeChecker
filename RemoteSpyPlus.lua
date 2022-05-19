@@ -215,7 +215,7 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 
 			shared.JLog("DebugFakeParam Original Param is ", tableToString(param))
 			local returnValues = {realMethods[key](self, unpack(modParam))}
-			shared.JLog("\n" .. strId .. " ClassName: " .. self.ClassName .. " | Path: " .. self:GetFullName() .. " | Method: " .. key .. "\n" .. strId .. " Packed Arguments: " .. tableToString(allPassed) .. "\n" .. strId .. " Packed Returned: " .. tableToString(returnValues) .. "\n")
+			shared.JLog("\n" .. strId .. " ClassName: " .. self.ClassName .. " | Path: " .. self:GetFullName() .. " | Method: " .. key .. "\n" .. strId .. " Packed Arguments: " .. tableToString(modParam) .. "\n" .. strId .. " Packed Returned: " .. tableToString(returnValues) .. "\n")
 			return unpack(returnValues)
 		end
 
