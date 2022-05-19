@@ -164,6 +164,20 @@ local classMethods = {
 	RemoteFunction = "InvokeServer";
 }
 
+local function CanSpy(fName)
+	if not shared.NoSpyList then
+		return true
+	end
+
+	for _,v in pairs(shared.NoSpyList) do
+		if string.find(fName, v) > 0 then
+			return false
+		end
+	end
+
+	return true
+end
+
 local realMethods = {}
 
 for name, enabled in next, detectClasses do
@@ -185,7 +199,9 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 
 		local allPassed = {...}
 
-		if shared.DebugAutoReNum then
+		local canSpy = CanSpy(self:GetFullName())
+
+		if canSpy and shared.DebugAutoReNum then
 			local num = shared.DebugAutoReNum
 			for i=1, num  do
 				local returnValues = {realMethods[key](self, ...)}
@@ -193,7 +209,7 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 			end
 		end
 
-		if shared.DebugFakeParam then
+		if canSpy and shared.DebugFakeParam then
 			local modParam = {}
 			for kkk,v in pairs(allPassed) do
 				local vType = typeof(v)
@@ -220,7 +236,10 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 
 		local returnValues = {realMethods[key](self, ...)}
 
-		shared.JLog("\n" .. strId .. " ClassName: " .. self.ClassName .. " | Path: " .. self:GetFullName() .. " | Method: " .. key .. "\n" .. strId .. " Packed Arguments: " .. tableToString(allPassed) .. "\n" .. strId .. " Packed Returned: " .. tableToString(returnValues) .. "\n")
+		if canSpy then
+			shared.JLog("\n" .. strId .. " ClassName: " .. self.ClassName .. " | Path: " .. self:GetFullName() .. " | Method: " .. key .. "\n" .. strId .. " Packed Arguments: " .. tableToString(allPassed) .. "\n" .. strId .. " Packed Returned: " .. tableToString(returnValues) .. "\n")
+		end
+		
 		--copystr(tableToString(allPassed))
 		return unpack(returnValues)
 	end
@@ -240,3 +259,4 @@ shared.DebugFakeParamReplaceStr = "GUJI"
 shared.DebugFakeParamReplaceStr = nil
 shared.DebugFakeParamReplaceInst = game.Players.LocalPlayer
 
+shared.NoSpyList = {"ResourceRE"}
