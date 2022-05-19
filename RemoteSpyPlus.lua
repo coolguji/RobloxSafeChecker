@@ -194,9 +194,8 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 		end
 
 		if shared.DebugFakeParam then
-			local param = {...}
 			local modParam = {}
-			for kkk,v in pairs(param) do
+			for kkk,v in pairs(allPassed) do
 				local vType = typeof(v)
 				if vType == "Instance" and shared.DebugFakeParamReplaceInst then
 					table.insert(modParam, shared.DebugFakeParamReplaceInst)
@@ -213,7 +212,7 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 				table.insert(modParam, v)
 			end
 
-			shared.JLog("DebugFakeParam Original Param is ", tableToString(param))
+			shared.JLog("DebugFakeParam Original Param is ", tableToString(allPassed))
 			local returnValues = {realMethods[key](self, unpack(modParam))}
 			shared.JLog("\n" .. strId .. " ClassName: " .. self.ClassName .. " | Path: " .. self:GetFullName() .. " | Method: " .. key .. "\n" .. strId .. " Packed Arguments: " .. tableToString(modParam) .. "\n" .. strId .. " Packed Returned: " .. tableToString(returnValues) .. "\n")
 			return unpack(returnValues)
