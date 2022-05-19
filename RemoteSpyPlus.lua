@@ -169,7 +169,7 @@ local function CanSpy(fName)
 		return true
 	end
 
-	for _,v in pairs(shared.NoSpyList) do
+	for k,v in pairs(shared.NoSpyList) do
 		if string.find(fName, v) > 0 then
 			return false
 		end
