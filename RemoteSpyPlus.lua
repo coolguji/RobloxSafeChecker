@@ -199,7 +199,7 @@ gameMeta.__index, gameMeta.__namecall = function(self, key)
 
 		local allPassed = {...}
 
-		local canSpy = CanSpy(self:GetFullName())
+		local canSpy = CanSpy(tostring(self:GetFullName()))
 
 		if canSpy and shared.DebugAutoReNum then
 			local num = shared.DebugAutoReNum
